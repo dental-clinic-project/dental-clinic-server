@@ -1,6 +1,6 @@
-const Team = require('../models/teamModel');
+import Team from '../models/teamModel.js';
 
-exports.getTeam = async (req, res) => {
+export const getTeam = async (req, res) => {
   try {
     const team = await Team.find();
 

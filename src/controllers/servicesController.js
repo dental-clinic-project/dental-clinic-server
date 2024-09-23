@@ -1,6 +1,6 @@
-const Services = require('../models/servicesModel');
+import Services from '../models/servicesModel.js';
 
-exports.getServices = async (req, res) => {
+export const getServices = async (req, res) => {
   try {
     const services = await Services.find();
     res.status(200).json({

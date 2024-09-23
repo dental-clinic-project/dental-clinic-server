@@ -1,12 +1,12 @@
-const Users = require('../models/authModel');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
-const { body, validationResult } = require('express-validator');
+import Users from '../models/authModel.js';
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
+import { body, validationResult } from 'express-validator';
 
-exports.registerValidation = [
+export const registerValidation = [
   body('email').isEmail().withMessage('Invalid email address'),
   body('password').isLength({ min: 8 }).withMessage('Password must be at least 8 characters long'),
-  body('fullName').isLength({ min: 3 }).withMessage('Full name must be at least 3 characters long'),
+  body('fullName').isLength({ min: 6 }).withMessage('Full name must be at least 6 characters long'),
   body('phone')
     .isLength({ min: 13 })
     .withMessage('Phone number must be at least 13 characters long'),
@@ -14,13 +14,14 @@ exports.registerValidation = [
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      const errorArray = errors.array();
+      return res.status(400).json({ message: errorArray[0].msg });
     }
     next();
   },
 ];
 
-exports.login = async (req, res) => {
+export const login = async (req, res) => {
   try {
     const user = await Users.findOne({ email: req.body.email });
 
@@ -52,7 +53,7 @@ exports.login = async (req, res) => {
   }
 };
 
-exports.signup = async (req, res) => {
+export const signup = async (req, res) => {
   try {
     const hash = bcrypt.hashSync(req.body.password, 10);
 
