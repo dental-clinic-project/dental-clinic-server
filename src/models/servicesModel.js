@@ -1,14 +1,23 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const servicesSchema = new mongoose.Schema({
   service: {
     type: String,
-    required: [true, 'Please add a service'],
+    required: [true, "Please add a service"],
   },
   description: {
     type: String,
-    required: [true, 'Please add a description'],
+    required: [true, "Please add a description"],
+  },
+  card: {
+    type: Object,
+    required: [true, "Please add a card"],
+
+    cardDescription: {
+      type: Array,
+      required: [true, "Please add a card description"],
+    },
   },
 });
 
-export default mongoose.model('Services', servicesSchema);
+export default mongoose.model("Services", servicesSchema);

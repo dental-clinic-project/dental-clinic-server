@@ -57,14 +57,21 @@ export const signup = async (req, res) => {
   try {
     const hash = bcrypt.hashSync(req.body.password, 10);
 
-    const doc = new Users({
+    // const doc = new Users({
+    //   email: req.body.email,
+    //   passwordHash: hash,
+    //   phone: req.body.phone,
+    //   fullName: req.body.fullName,
+    // });
+
+    // const user = await doc.save();
+
+    const user = await Users.create({
       email: req.body.email,
       passwordHash: hash,
       phone: req.body.phone,
       fullName: req.body.fullName,
     });
-
-    const user = await doc.save();
 
     const token = jwt.sign(
       {
