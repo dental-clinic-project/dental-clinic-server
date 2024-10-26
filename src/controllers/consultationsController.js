@@ -2,10 +2,11 @@ import Consultations from "../models/consultationsModel.js";
 
 export const validateConsultation = async (req, res, next) => {
   try {
-    const consultation = await Consultations.findOne({ date: req.body.date });
+    console.log(req.query.date, "date");
+    const consultation = await Consultations.findOne({ date: req.query.date });
 
     if (consultation === null) {
-      req.body.consultation = await Consultations.create(req.body);
+      req.body.consultation = await Consultations.create(req.query);
       next();
     } else {
       req.body.consultation = consultation;
@@ -14,7 +15,7 @@ export const validateConsultation = async (req, res, next) => {
   } catch (err) {
     res.status(404).json({
       status: "fail",
-      message: err || "Feailed to get Consultation data",
+      message: err || "Failed to get Consultation data",
     });
   }
 };

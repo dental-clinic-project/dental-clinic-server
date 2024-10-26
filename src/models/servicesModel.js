@@ -9,6 +9,11 @@ const servicesSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please add a description"],
   },
+  path: {
+    type: String,
+    require: true,
+    unique: true,
+  },
   card: {
     type: Object,
     required: [true, "Please add a card"],

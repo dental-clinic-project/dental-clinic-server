@@ -1,23 +1,23 @@
-import Team from '../models/teamModel.js';
+import Team from "../models/teamModel.js";
 
 export const getTeam = async (req, res) => {
   try {
-    const team = await Team.find();
+  const team = await Team.find();
 
-    console.log('team is success');
+    console.log("team is success");
 
     res.status(200).json({
-      status: 'success',
+      status: "success",
       results: team.length,
       data: {
         team,
       },
     });
   } catch (err) {
-    console.log('team is fail');
+    console.log("team is fail");
     res.status(404).json({
-      status: 'fail',
-      message: err || 'Feailed to get team data',
+      status: "fail",
+      message: err || "Feailed to get team data",
     });
   }
 };
