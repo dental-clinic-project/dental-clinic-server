@@ -10,7 +10,7 @@ import consultationsRoutes from "./routes/consultationsRoutes.js";
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({ origin: "http://localhost:5173" }));
 
 app.use("/api/v1/team", teamRoutes);
 app.use("/api/v1/services", servicesRoutes);
